@@ -1,0 +1,96 @@
+--CREATE TABLE Impiego (
+--	IDImpiego int PRIMARY KEY NOT NULL IDENTITY,
+--	TipoImpiego nvarchar(max),
+--	DataAssunzione date
+--)
+
+--CREATE TABLE Impiegato (
+--	IDImpiegato int PRIMARY KEY NOT NULL IDENTITY,
+--	Cognome nvarchar(20) NOT NULL,
+--	Nome nvarchar(20) NOT NULL,
+--	CF char(16) UNIQUE NOT NULL,
+--	Età int,
+--	RedditoMensile money NOT NULL,
+--	DetrazioneFiscale bit NOT NULL,
+
+--	IDImpiego int NOT NULL
+
+--	CONSTRAINT FK_Impiego_Impiegato FOREIGN KEY (IDImpiego) REFERENCES Impiego(IDImpiego)
+--)
+
+--ALTER TABLE Impiego ALTER COLUMN DataAssunzione date NOT NULL
+--ALTER TABLE Impiego ALTER COLUMN TipoImpiego nvarchar(max) NOT NULL
+
+--INSERT INTO Impiego VALUES ('Addetto Vendite','2016/08/20')
+--INSERT INTO Impiego VALUES ('Responsabile Reparto','2020/01/06')
+--INSERT INTO Impiego VALUES ('IT Manager','2010/10/15')
+--INSERT INTO Impiego VALUES ('Senior Dev','2015/11/30')
+--INSERT INTO Impiego VALUES ('Junior Dev','2022/10/23')
+
+
+--INSERT INTO Impiegato VALUES ('Dabbicco','Roberto','DBBRRT96M19A662P',26,5800,1,3)
+--INSERT INTO Impiegato VALUES ('Rossi','Mario','JSHFNCJBD454JHDJ',35,4000,0,2)
+--INSERT INTO Impiegato VALUES ('Puccio','Marco','HGSDFJGHJDFJHGDF',41,2070,0,2)
+--INSERT INTO Impiegato VALUES ('Ariosto','Ludovico','HSFJHGSDFJHGHDHH',28,2700,0,1)
+--INSERT INTO Impiegato VALUES ('Bacon','Francis','SDFDFVRTGVTG54YP',28,3200,0,5)
+--INSERT INTO Impiegato VALUES ('VIII','Enrico','TRVVDVFG67567FBB',31,4200,0,4)
+--INSERT INTO Impiegato VALUES ('Marley','Bob','RTGVRVRTGTG5762P',32,5000,1,1)
+--INSERT INTO Impiegato VALUES ('Ketchum','Ash','NUIKLJHVTG656RFP',23,3800,0,3)
+--INSERT INTO Impiegato VALUES ('Aufieri','Armando','FBRVVRTVV19A662P',53,5840,1,1)
+--INSERT INTO Impiegato VALUES ('Opu','Opu','DBBRERGEGR9A662P',42,5600,1,3)
+--INSERT INTO Impiegato VALUES ('Kontrappali','Rajesh','DBRERG96M19A662P',34,4200,0,1)
+--INSERT INTO Impiegato VALUES ('Wollowitz','Award','DBBRRGTRYHYTDF2P',34,1200,0,3)
+--INSERT INTO Impiegato VALUES ('Aufstader','Leonard','DBBERGEUHRGA662P',36,1200,1,4)
+--INSERT INTO Impiegato VALUES ('Farhaufholer','Amy','DBBEFEF4669A662P',27,1400,1,1)
+--INSERT INTO Impiegato VALUES ('Boh','Penny','DBEGDCER345A662P',27,1450,0,1)
+--INSERT INTO Impiegato VALUES ('Rostenkowski','Bernadette','DBBRERTYYGG6572P',26,6020,1,3)
+--INSERT INTO Impiegato VALUES ('BohBoh','Roberto','TYEGTRGU676A662P',26,3640,1,5)
+--INSERT INTO Impiegato VALUES ('Ludwig van','Beethoven','DBRTHRTG787A662P',22,5800,0,3)
+--INSERT INTO Impiegato VALUES ('Mozart','Wolfgang Amadeus','DBBRTYUJUJPOOP2P',29,5800,0,2)
+--INSERT INTO Impiegato VALUES ('Tutan','Kamon','DBBPPPPHBFVDFV2P',30,4020,1,5)
+
+SELECT * FROM Impiegato
+
+--a
+SELECT * FROM Impiegato 
+where Età > 29
+
+--b (mensili 2500 almeno)
+SELECT * FROM Impiegato
+where RedditoMensile >= 2500
+
+--c 
+SELECT * FROM Impiegato
+where DetrazioneFiscale = 1
+
+--d
+SELECT * FROM Impiegato
+where DetrazioneFiscale = 0
+
+--e (ho usato la lettera B perchè non avevo inserito cognomi con la G
+SELECT * FROM Impiegato
+where Cognome LIKE 'B%'
+ORDER BY Cognome
+
+--f
+SELECT Count(*) as Impiegati FROM Impiegato
+
+--g
+SELECT SUM(RedditoMensile) as TotRedditi FROM Impiegato
+
+--h
+SELECT AVG(RedditoMensile) as AVG_Reddito FROM Impiegato
+
+--i
+SELECT MAX(RedditoMensile) as MaxReddito FROM Impiegato
+
+--j
+SELECT MIN(RedditoMensile) as MaxReddito FROM Impiegato
+
+--k  (Ho usato 2015 e 2020)
+SELECT Cognome,Nome, CF, DataAssunzione FROM Impiegato 
+INNER JOIN Impiego
+
+ON Impiegato.IDImpiego = Impiego.IDImpiego
+where DataAssunzione BETWEEN '2015/01/01' AND '2020/12/31'
+Order by DataAssunzione
